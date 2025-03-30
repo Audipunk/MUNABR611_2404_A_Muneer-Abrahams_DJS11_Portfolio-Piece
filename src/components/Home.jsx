@@ -118,8 +118,8 @@ This function is likely used when a user clicks on a show to start playing it, a
   return (
     <Box className="home">
       <Flex direction="column" align="center" justify="center" style={{ textAlign: 'center', marginBottom: '24px' }}>
-        <Heading size="8" className="welcome-heading">⭕-Casst</Heading>
-        <Text size="4" align="center" mb="6" color="gray"></Text>
+        <Heading size="12" className="welcome-heading">🎙⭕-Casst</Heading>
+        <Text size="12" align="center" mb="8" color="gray"></Text>
       </Flex>
 
       <Card className="carousel-container">
