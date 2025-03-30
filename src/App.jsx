@@ -256,8 +256,8 @@ This function is useful for quickly determining whether a particular show or epi
           <nav className={`navbar ${theme}`}>
             <div className="navbar-content">
               <div className="navbar-center">
+              <Link to="/shows">Shows</Link>
                 <Link to="/">Home</Link>
-                <Link to="/shows">Shows</Link>
                 <Link to="/favorites">Favorites</Link>
                 <Link to="/completed">Listening History</Link>
               </div>
@@ -271,6 +271,8 @@ This function is useful for quickly determining whether a particular show or epi
           <main className="content">
             <Routes>
               <Route path="/" element={<Home playAudio={playAudio} />} />
+              console.log("playAudio called with:", showId, seasonNumber, episodeNumber);
+
               <Route 
                 path="/shows" 
                 element={
