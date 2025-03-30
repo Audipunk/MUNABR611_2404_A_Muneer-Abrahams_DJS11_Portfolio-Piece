@@ -50,7 +50,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  min-height: var(--navbar-min-height);
+  min-height: 1;
   font-size: 1.7rem;
   color: rgb(54, 160, 86);
   z-index: 1000;
@@ -145,7 +145,7 @@ body {
 }
 
 .carousel-container {
-  max-width: 90%;
+  max-width: 50%;
   margin: 0 auto 40px;
   height: 500px;
   padding-bottom: 40px;
@@ -417,7 +417,7 @@ body {
 /* Dark Theme */
 .dark {
   background-color: var(--dark-bg);
-  color: var(--dark-text);
+  color: white;
 }
 
 .dark .show-card {
@@ -559,4 +559,5 @@ body {
   background: url('/watermark.png') no-repeat fixed center;
   background-size: 200px; /* Adjust size as needed */
   opacity: 0.1; /* Adjust transparency */
+  color: rgb(174, 238, 240);
 }
