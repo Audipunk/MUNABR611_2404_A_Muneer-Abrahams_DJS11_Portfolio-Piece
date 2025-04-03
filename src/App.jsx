@@ -162,6 +162,7 @@ function App() {
           genres: showData.genres, // This will be an array of genre IDs
           dateAdded: new Date().toISOString(),
           updated: showData.updated,
+          // eslint-disable-next-line no-dupe-keys
           dateAdded:  new Date().updated
         };
       } else {
@@ -256,10 +257,10 @@ This function is useful for quickly determining whether a particular show or epi
           <nav className={`navbar ${theme}`}>
             <div className="navbar-content">
               <div className="navbar-center">
+              <Link to="/">Home</Link>
               <Link to="/shows">Shows</Link>
-                <Link to="/">Home</Link>
                 <Link to="/favorites">Favorites</Link>
-                <Link to="/completed">Listening History</Link>
+                <Link to="/completed">Logs</Link>
               </div>
               <div className="navbar-right">
                 <SearchBar onSearch={handleSearch} />

@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Button, Flex, Text, Slider } from '@radix-ui/themes';
 import { PlayIcon, PauseIcon } from '@radix-ui/react-icons';

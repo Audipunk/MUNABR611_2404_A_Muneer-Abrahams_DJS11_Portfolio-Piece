@@ -1,8 +1,8 @@
 # 🎙⭕-Casst - Podcast App
 
-## 🌐 API Base URL:
+## 🌐 API Base URL
 
-- **Base URL:** [https://podcast-api.netlify.app](https://podcast-api.netlify.app)
+- **Base URL:** [https://o-casst.netlify.app](https://podcast-api.netlify.app)
 
 ## 🎧 Features:
 

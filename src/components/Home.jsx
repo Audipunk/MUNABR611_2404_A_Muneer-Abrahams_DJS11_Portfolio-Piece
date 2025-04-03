@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Heading, Text, Card, Flex, Box } from '@radix-ui/themes';
@@ -10,6 +11,7 @@ const API_URL = 'https://podcast-api.netlify.app';
 
 //duplicate but when i delete i get an error
 function CustomPrevArrow(props) {
+  // eslint-disable-next-line react/prop-types
   const { className, style, onClick } = props;
   return (
     <Box
@@ -30,6 +32,7 @@ function CustomPrevArrow(props) {
 
 
 function CustomNextArrow(props) {
+  // eslint-disable-next-line react/prop-types
   const { className, style, onClick } = props;
   return (
     <Box
@@ -46,6 +49,7 @@ function CustomNextArrow(props) {
   );
 }
 
+// eslint-disable-next-line react/prop-types
 function Home({ playAudio }) { //destructures playaudio function
   const [shows, setShows] = useState([]); //setter function initialised to empty array
   const [isLoading, setIsLoading] = useState(true); //is loadingn while loading 
