@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
-// eslint-disable-next-line no-unused-vars
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button, Flex, Text, Slider } from '@radix-ui/themes';
 import { PlayIcon, PauseIcon } from '@radix-ui/react-icons';
 
@@ -8,67 +6,69 @@ function AudioPlayer({ currentEpisode, onComplete, updatePlaybackPosition }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(currentEpisode?.currentTime || 0);
   const [duration, setDuration] = useState(0);
-  const audioRef = useRef(null);
-
-  // Update playback position
-  const updateTime = useCallback(() => {
-    if (!audioRef.current) return;
-    setCurrentTime(audioRef.current.currentTime);
-    updatePlaybackPosition(currentEpisode.id, audioRef.current.currentTime);
-  }, [currentEpisode, updatePlaybackPosition]);
-
-  const setAudioDuration = useCallback(() => {
-    if (audioRef.current) setDuration(audioRef.current.duration);
-  }, []);
-
-  const handleAudioEnd = useCallback(() => {
-    setIsPlaying(false);
-    setCurrentTime(0);
-    onComplete?.(currentEpisode);
-  }, [currentEpisode, onComplete]);
+  const audioRef = useRef(null);//Gives direct access to the HTML audio element It doesn't trigger re-renders when accessed or changed
 
   useEffect(() => {
-    if (!audioRef.current) return;
-    const audio = audioRef.current;
-
-    audio.addEventListener('timeupdate', updateTime);
-    audio.addEventListener('loadedmetadata', setAudioDuration);
-    audio.addEventListener('ended', handleAudioEnd);
-    
-    return () => {
-      audio.removeEventListener('timeupdate', updateTime);
-      audio.removeEventListener('loadedmetadata', setAudioDuration);
-      audio.removeEventListener('ended', handleAudioEnd);
-    };
-  }, [updateTime, setAudioDuration, handleAudioEnd]);
+    if (audioRef.current) {// Add event listeners
+      audioRef.current.addEventListener('timeupdate', updateTime);
+      audioRef.current.addEventListener('loadedmetadata', setAudioDuration);
+      audioRef.current.addEventListener('ended', handleAudioEnd);
+      return () => {   // Remove event listeners when component unmounts
+        audioRef.current.removeEventListener('timeupdate', updateTime);
+        audioRef.current.removeEventListener('loadedmetadata', setAudioDuration);
+        audioRef.current.removeEventListener('ended', handleAudioEnd);
+      };
+    }
+  }, []); // Empty dependency array means this runs once on mount
 
   useEffect(() => {
-    if (currentEpisode && audioRef.current) {
-      const audio = audioRef.current;
-      audio.src = currentEpisode.file;
-      audio.currentTime = currentEpisode.currentTime || 0;
-      audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+    if (currentEpisode) {
+      audioRef.current.src = currentEpisode.file; // 1. Set the audio source
+      audioRef.current.currentTime = currentEpisode.currentTime || 0; // 2. Set the playback position
+      audioRef.current.play();
+      setIsPlaying(true);
     }
   }, [currentEpisode]);
 
   const togglePlay = () => {
-    if (!audioRef.current) return;
-    isPlaying ? audioRef.current.pause() : audioRef.current.play();
-    setIsPlaying(!isPlaying);
+    if (currentEpisode) {
+      if (isPlaying) {
+        audioRef.current.pause();// Pause if playing
+      } else {
+        audioRef.current.play(); // Play if paused
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
 
-  const handleSeek = (value) => {
-    if (!audioRef.current) return;
-    const newTime = value[0];
-    setCurrentTime(newTime);
-    audioRef.current.currentTime = newTime;
-    updatePlaybackPosition(currentEpisode.id, newTime);
+  const updateTime = () => {
+    setCurrentTime(audioRef.current.currentTime);
+    updatePlaybackPosition(currentEpisode.id, audioRef.current.currentTime);
+  };
+
+  const setAudioDuration = () => {
+    setDuration(audioRef.current.duration);
+  };
+
+  const handleAudioEnd = () => {
+    setIsPlaying(false);
+    setCurrentTime(0);
+    if (onComplete) {
+      onComplete(currentEpisode);
+    }
   };
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
+  const handleSeek = (value) => {
+    const newTime = value[0];
+    setCurrentTime(newTime);
+    audioRef.current.currentTime = newTime;
+    updatePlaybackPosition(currentEpisode.id, newTime);
   };
 
   if (!currentEpisode) return null;

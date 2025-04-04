@@ -272,7 +272,7 @@ This function is useful for quickly determining whether a particular show or epi
           <main className="content">
             <Routes>
               <Route path="/" element={<Home playAudio={playAudio} />} />
-              console.log("playAudio called with:", showId, seasonNumber, episodeNumber);
+              console.log(&quot;playAudio called with:&quot;, showId, seasonNumber, episodeNumber);
 
               <Route 
                 path="/shows" 
