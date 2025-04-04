@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-comment-textnodes */
-// eslint-disable-next-line no-unused-vars
 import React, { useState, useRef, useEffect } from 'react';
 import { Button, Flex, Text, Slider } from '@radix-ui/themes';
 import { PlayIcon, PauseIcon, Cross1Icon } from '@radix-ui/react-icons';
@@ -20,11 +19,10 @@ function AudioPlayer({ currentEpisode, onComplete, updatePlaybackPosition, onClo
       return () => {
         audioRef.current.removeEventListener('timeupdate', updateTime);
         audioRef.current.removeEventListener('loadedmetadata', setAudioDuration);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         audioRef.current.removeEventListener('ended', handleAudioEnd);
       };
     }
-  }, [handleAudioEnd, updateTime]);
+  }, []);
 
   useEffect(() => {
     if (currentEpisode) {
@@ -46,7 +44,6 @@ function AudioPlayer({ currentEpisode, onComplete, updatePlaybackPosition, onClo
     }
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateTime = () => {
     setCurrentTime(audioRef.current.currentTime);
     updatePlaybackPosition(currentEpisode.id, audioRef.current.currentTime);
@@ -56,7 +53,6 @@ function AudioPlayer({ currentEpisode, onComplete, updatePlaybackPosition, onClo
     setDuration(audioRef.current.duration);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleAudioEnd = () => {
     setIsPlaying(false);
     setCurrentTime(0);

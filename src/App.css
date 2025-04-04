@@ -1,8 +1,8 @@
 @import '@radix-ui/themes/styles.css';
 
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
+  --primary-color: hsl(210, 15%, 92%);
+  --secondary-color: hsl(140, 12%, 90%);
   --accent-color: #e74c3c;
   --background-color: #61cf6a;
   --text-color: #333333;
@@ -22,7 +22,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--font-sans);
-  background-color:  #61cf6a;
+  background-color:  hsl(124, 33%, 92%);
   color: var(--light-text);
   line-height: 1.5;
   font-size: 20px;
