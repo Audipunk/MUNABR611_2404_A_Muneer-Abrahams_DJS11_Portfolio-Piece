@@ -60,12 +60,14 @@ function EpisodeCard({ episode, playbackPositions, handlePlayAudio }) {
   );
 }
 
+// eslint-disable-next-line react/prop-types
 function CompletedEpisodes({ listeningHistory, playAudio, resetListeningHistory, searchQuery, playbackPositions }) {
   const [filteredHistory, setFilteredHistory] = useState([]);
 
   useEffect(() => {
     setFilteredHistory(
       searchQuery
+        // eslint-disable-next-line react/prop-types
         ? listeningHistory.filter(
             (episode) =>
               (episode.title && episode.title.toLowerCase().includes(searchQuery.toLowerCase())) ||

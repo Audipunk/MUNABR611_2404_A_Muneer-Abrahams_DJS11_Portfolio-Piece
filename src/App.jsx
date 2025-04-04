@@ -46,7 +46,7 @@ function App() {
     setPlaybackPositions(storedPlaybackPositions);
   }, []);// initialises application state from localstorage when component mounts 
 
-  //show a warning to the user if they try to close or refressh the page while audio playing 
+  //shows a warning to the user if they try to close or refressh the page while audio playing 
   useEffect(() => {
     const handleBeforeUnload = (event) => {//function is called when user tries to leave the page
     

@@ -11,6 +11,7 @@ const API_URL = 'https://podcast-api.netlify.app';
 
 
 function CustomPrevArrow(props) {
+
   // eslint-disable-next-line react/prop-types
   const { className, style, onClick } = props;
   return (
@@ -49,7 +50,7 @@ function CustomNextArrow(props) {
   );
 }
 
-// eslint-disable-next-line react/prop-types
+
 function Home({ playAudio }) { //destructures playaudio function
   const [shows, setShows] = useState([]); //setter function initialised to empty array
   const [isLoading, setIsLoading] = useState(true); //shows that is loading while loading 

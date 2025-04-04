@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-no-comment-textnodes */
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Button, Flex, Text, Slider } from '@radix-ui/themes';
 import { PlayIcon, PauseIcon, Cross1Icon } from '@radix-ui/react-icons';
@@ -112,9 +112,10 @@ function AudioPlayer({ currentEpisode, onComplete, updatePlaybackPosition, onClo
         </Text>
       </Flex>
 
-      // eslint-disable-next-line react/jsx-no-comment-textnodes
+
       <Text size="2" style={{ color: 'black' }}>
-        // eslint-disable-next-line react/prop-types, react/prop-types, react/prop-types
+        <span style={{ color: 'gray' }}>Current Position:</span> {formatTime(currentTime)} / {formatTime(duration)}
+       
         Season {currentEpisode.seasonNumber}, Episode {currentEpisode.episodeNumber}
       </Text>
     </Flex>
