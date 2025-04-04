@@ -320,15 +320,15 @@ nav ul li a:hover {
 
 .favorite-content a:hover,
 .favorite-content button:hover {
-  background-color: #0056b3;
+  background-color: #f2f7fc;
 }
 
 .favorite-content .play-button {
-  background-color: #28a745;
+  background-color: hsl(150, 5%, 92%);
 }
 
 .favorite-content .play-button:hover {
-  background-color: #218838;
+  background-color: #d9e0da;
 }
 
 .favorite-content .favorite-button {

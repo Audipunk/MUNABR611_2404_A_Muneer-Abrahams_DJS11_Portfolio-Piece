@@ -124,7 +124,7 @@ function App() {
       return newHistory;
     });
   };
-  //Overall, this function updates the listening history by either adding a new episode to the beginning of the histor
+  //This function updates the listening history by either adding a new episode to the beginning of the histor
 //y or moving an existing episode to the front if it's already in the history. It also updates the episode data if it already exists. Finally, it saves the updated history to localStorage for persistence across sessions
   const updatePlaybackPosition = (episodeId, currentTime) => {
     setPlaybackPositions(prev => {
@@ -141,7 +141,8 @@ function App() {
       return newHistory;
     });
   };
-  //Overall, this function does two main things:1. It updates the playback position for a specific episode in the `playbackPositions` state and localStorage.
+  //This function does two main things:
+// 1. It updates the playback position for a specific episode in the `playbackPositions` state and localStorage.
 //2. It updates the `currentTime` for the same episode in the listening history state and localStorage.
   const toggleFavorite = async (item, show = null) => {
     try {
@@ -197,16 +198,15 @@ function App() {
     }
   };
   /*
-Overall, this function does the following:
+This function does the following:
+-Determines whether the item to be favorited is an episode or a show.
+-Fetches additional data about the item from an API.
+-Constructs a favoriteItem object with all necessary information.
+-Updates the favorites list by either adding the item (if it wasn't already a favorite) or removing it (if it was already a favorite).
+-Saves the updated favorites list to localStorage.
+-Handles any errors that might occur during this process.
 
-Determines whether the item to be favorited is an episode or a show.
-Fetches additional data about the item from an API.
-Constructs a favoriteItem object with all necessary information.
-Updates the favorites list by either adding the item (if it wasn't already a favorite) or removing it (if it was already a favorite).
-Saves the updated favorites list to localStorage.
-Handles any errors that might occur during this process.
-
-This function provides a complete "toggle" functionality for adding or removing items from a favorites list, with error handling and persistence to localStorage.
+Function provides a complete "toggle" functionality for adding or removing items from a favorites list, with error handling and persistence to localStorage.
   */
 
   const isFavorite = (showId, episodeTitle) => {
@@ -216,13 +216,13 @@ This function provides a complete "toggle" functionality for adding or removing 
     return favorites.some(fav => fav.showId === showId);
   };
 /*
-Overall, this function does the following:
+This function does the following:
 
 If an episodeTitle is provided, it checks if a specific episode is in the favorites list by looking for a favorite with an id that combines the showId and episodeTitle.
 If no episodeTitle is provided, it checks if a show is in the favorites list by looking for a favorite with a matching showId.
 It returns true if the item (either episode or show) is found in the favorites, and false otherwise.
 
-This function is useful for quickly determining whether a particular show or episode is currently in the user's favorites list, which could be used, for example, to display a filled or unfilled heart icon next to items in a user interface
+function is useful for quickly determining whether a particular show or episode is currently in the user's favorites list, which could be used, for example, to display a filled or unfilled heart icon next to items in a user interface
 
 */
   const toggleTheme = () => {
@@ -231,7 +231,7 @@ This function is useful for quickly determining whether a particular show or epi
     localStorage.setItem('theme', newTheme);
   };
   /*
-  This function is typically used in conjunction with a button or some other user interface element that allows the user to switch between light and dark modes in the application. When called, it will switch the current theme to its opposite and ensure this change is reflected both in the current state and in persistent storage.
+  This function is used in conjunction with a button or some other user interface element that allows the user to switch between light and dark modes in the application. When called, it will switch the current theme to its opposite and ensure this change is reflected both in the current state and in persistent storage.
   */
 
   const markEpisodeAsCompleted = (episode) => {
