@@ -1,30 +1,34 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-no-comment-textnodes */
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useRef, useEffect } from 'react';
 import { Button, Flex, Text, Slider } from '@radix-ui/themes';
-import { PlayIcon, PauseIcon } from '@radix-ui/react-icons';
+import { PlayIcon, PauseIcon, Cross1Icon } from '@radix-ui/react-icons';
 
-function AudioPlayer({ currentEpisode, onComplete, updatePlaybackPosition }) {
+function AudioPlayer({ currentEpisode, onComplete, updatePlaybackPosition, onClose }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(currentEpisode?.currentTime || 0);
   const [duration, setDuration] = useState(0);
-  const audioRef = useRef(null);//Gives direct access to the HTML audio element It doesn't trigger re-renders when accessed or changed
+  const [isVisible, setIsVisible] = useState(true); // Track visibility state
+  const audioRef = useRef(null);
 
   useEffect(() => {
-    if (audioRef.current) {// Add event listeners
+    if (audioRef.current) {
       audioRef.current.addEventListener('timeupdate', updateTime);
       audioRef.current.addEventListener('loadedmetadata', setAudioDuration);
       audioRef.current.addEventListener('ended', handleAudioEnd);
-      return () => {   // Remove event listeners when component unmounts
+      return () => {
         audioRef.current.removeEventListener('timeupdate', updateTime);
         audioRef.current.removeEventListener('loadedmetadata', setAudioDuration);
         audioRef.current.removeEventListener('ended', handleAudioEnd);
       };
     }
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
 
   useEffect(() => {
     if (currentEpisode) {
-      audioRef.current.src = currentEpisode.file; // 1. Set the audio source
-      audioRef.current.currentTime = currentEpisode.currentTime || 0; // 2. Set the playback position
+      audioRef.current.src = currentEpisode.file;
+      audioRef.current.currentTime = currentEpisode.currentTime || 0;
       audioRef.current.play();
       setIsPlaying(true);
     }
@@ -33,9 +37,9 @@ function AudioPlayer({ currentEpisode, onComplete, updatePlaybackPosition }) {
   const togglePlay = () => {
     if (currentEpisode) {
       if (isPlaying) {
-        audioRef.current.pause();// Pause if playing
+        audioRef.current.pause();
       } else {
-        audioRef.current.play(); // Play if paused
+        audioRef.current.play();
       }
       setIsPlaying(!isPlaying);
     }
@@ -71,14 +75,28 @@ function AudioPlayer({ currentEpisode, onComplete, updatePlaybackPosition }) {
     updatePlaybackPosition(currentEpisode.id, newTime);
   };
 
-  if (!currentEpisode) return null;
+  const handleClose = () => {
+    setIsVisible(false); // Hide the component
+    if (onClose) {
+      onClose(); // Call parent function if provided
+    }
+  };
+
+  if (!currentEpisode || !isVisible) return null;
 
   return (
     <Flex direction="column" gap="2" className="audio-player bold-border">
       <audio ref={audioRef} />
-      <Text size="2" weight="bold" style={{ color: 'black' }}>
-        {currentEpisode.title} - {currentEpisode.showTitle}
-      </Text>
+      
+      <Flex justify="between" align="center">
+        <Text size="2" weight="bold" style={{ color: 'black' }}>
+          {currentEpisode.title} - {currentEpisode.showTitle}
+        </Text>
+        <Button onClick={handleClose} variant="ghost" size="1">
+          <Cross1Icon />
+        </Button>
+      </Flex>
+      
       <Flex align="center" gap="2">
         <Button onClick={togglePlay} variant="ghost" size="1">
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
@@ -94,7 +112,10 @@ function AudioPlayer({ currentEpisode, onComplete, updatePlaybackPosition }) {
           {formatTime(currentTime)} / {formatTime(duration)}
         </Text>
       </Flex>
+
+      // eslint-disable-next-line react/jsx-no-comment-textnodes
       <Text size="2" style={{ color: 'black' }}>
+        // eslint-disable-next-line react/prop-types, react/prop-types, react/prop-types
         Season {currentEpisode.seasonNumber}, Episode {currentEpisode.episodeNumber}
       </Text>
     </Flex>
