@@ -1,4 +1,11 @@
-🎙⭕ O-Casst - Podcast App - Developer Explanation
+# File with heading
+
+This is a file with a top-level heading
+
+🎙⭕ O-Casst
+
+Podcast App - Developer Explanation:
+Site Url:o-casst.netlify.app
 Overview:
 The O-Casst Podcast App is a React-based web application designed to provide users with an easy-to-use platform for browsing, discovering, and listening to podcasts. The app offers features such as podcast search, episode playback, personal libraries, and customizable filters. It is built with a focus on user experience, responsiveness, and smooth navigation.
 
@@ -17,7 +24,7 @@ Custom CSS: Custom CSS rules are defined for branding, layout, and overall UI ap
 Backend:
 API: The app consumes an external podcast API hosted on Netlify. It allows interaction with podcast data such as genres, individual episodes, and details.
 
-Base URL: https://podcast-api.netlify.app
+Base URL: <https://podcast-api.netlify.app>
 
 The API returns JSON data for podcasts and episodes, which is then displayed dynamically in the app.
 
@@ -68,13 +75,13 @@ Custom Styling: Additional custom CSS styling to match the branding and ensure a
 🔗 API Integration:
 The app interacts with the podcast API hosted on Netlify for fetching podcast data. Below are the key endpoints used:
 
-Base URL: https://podcast-api.netlify.app/
+Base URL: <https://podcast-api.netlify.app/>
 
-Shows List Endpoint: https://podcast-api.netlify.app/genre/<ID>
+Shows List Endpoint: <https://podcast-api.netlify.app/genre/><ID>
 
 Used to retrieve podcasts by genre.
 
-Show Details Endpoint: https://podcast-api.netlify.app/id/<ID>
+Show Details Endpoint: <https://podcast-api.netlify.app/id/><ID>
 
 Used to fetch detailed data for a specific podcast.
 
@@ -108,7 +115,6 @@ State Management: Managing the state between different components (like favorite
 📬 Contact Information:
 Name: Muneer Abrahams
 
-Email: Audipunkwp@gmail.com
+Email: <Audipunkwp@gmail.com>
 
-GitHub: https://github.com/Audipunk
-
+GitHub: <https://github.com/Audipunk>
